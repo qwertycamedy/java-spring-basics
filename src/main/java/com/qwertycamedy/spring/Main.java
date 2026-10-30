@@ -2,16 +2,24 @@ package com.qwertycamedy.spring;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+//синглтон, это когда экземпляр создается один раз и используется другими объектами
+//в спринге этот паттерн бинов настраивается автоматически по дефолту или аннотацией @Singleton
+
 public class Main {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("com.qwertycamedy");
-        Person person = context.getBean("person", Person.class);
-        Parking parking = context.getBean("parking", Parking.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("com.qwertycamedy.spring");
+        // они у нас синглтоны
+        Vehicle car1 = context.getBean("car", Vehicle.class);
+        Vehicle car2 = context.getBean("car", Vehicle.class);
 
-        System.out.println(parking.getList());
-        System.out.println(parking.getMap());
+        // тоже синглтоны
+        DBConnector connector1 = DBConnector.getInstance();
+        DBConnector connector2 = DBConnector.getInstance();
 
-        person.driveVehicle();
+        connector1.executeSql("user");
+        connector2.executeSql("admin");
+
+        System.out.println("connector1 == connector2: " + (connector1 == connector2));
 
         context.close();
     }
