@@ -3,7 +3,7 @@ package com.qwertycamedy.spring;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 //синглтон, это когда экземпляр создается один раз и используется другими объектами
-//в спринге этот паттерн бинов настраивается автоматически по дефолту или аннотацией @Singleton
+//в спринге этот паттерн бинов настраивается автоматически по дефолту или аннотацией @Scope("singleton")
 
 public class Main {
     public static void main(String[] args) {
