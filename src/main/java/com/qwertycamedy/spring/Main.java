@@ -4,10 +4,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Main {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("com.qwertycamedy.spring");
-        Vehicle vehicle = context.getBean("bike", Vehicle.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("com.qwertycamedy");
+        Person person = context.getBean("person", Person.class);
+        Parking parking = context.getBean("parking", Parking.class);
 
-        vehicle.startEngine();
+        System.out.println(parking.getList());
+        System.out.println(parking.getMap());
+
+        person.driveVehicle();
 
         context.close();
     }
