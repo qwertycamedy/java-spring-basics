@@ -1,7 +1,0 @@
-com/qwertycamedy/controller/CommonController.class
-com/qwertycamedy/service/RecordService.class
-com/qwertycamedy/config/WebConfig.class
-com/qwertycamedy/entity/Record.class
-com/qwertycamedy/entity/ERecordStatus.class
-com/qwertycamedy/config/ApplicationInitializer.class
-com/qwertycamedy/dao/RecordDao.class
