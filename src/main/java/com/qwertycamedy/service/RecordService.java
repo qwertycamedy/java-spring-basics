@@ -20,4 +20,8 @@ public class RecordService {
     public List<Record> findAllRecords() {
         return recordDao.findAllRecords();
     }
+
+    public void saveRecord(String title) {
+        recordDao.saveRecord(new Record(title));
+    }
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.qwertycamedy.entity.ERecordStatus;
 import com.qwertycamedy.entity.Record;
 
-@Repository 
+@Repository
 public class RecordDao {
     public final List<Record> records = new ArrayList<>(
             Arrays.asList(
@@ -19,5 +19,9 @@ public class RecordDao {
 
     public List<Record> findAllRecords() {
         return new ArrayList<>(records);
+    }
+
+    public void saveRecord(Record record) {
+        records.add(record);
     }
 }
