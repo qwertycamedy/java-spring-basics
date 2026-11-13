@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qwertycamedy.dao.RecordDao;
+import com.qwertycamedy.entity.ERecordStatus;
 import com.qwertycamedy.entity.Record;
 
 @Service
@@ -25,5 +26,13 @@ public class RecordService {
         if (title != null && !title.isBlank()) {
             recordDao.saveRecord(new Record(title));
         }
+    }
+
+    public void updateRecordStatus(String title, ERecordStatus newStatus) {
+        recordDao.updateRecordStatus(title, newStatus);
+    }
+
+    public void removeRecord(String title) {
+        recordDao.removeRecord(title);
     }
 }

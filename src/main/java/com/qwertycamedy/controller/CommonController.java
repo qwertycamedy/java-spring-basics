@@ -46,4 +46,16 @@ public class CommonController {
         recordService.saveRecord(title);
         return "redirect:/home";
     }
+
+    @PostMapping("/make-record-done")
+    public String makeRecordDone(@RequestParam("title") String title) {
+        recordService.updateRecordStatus(title, ERecordStatus.DONE);
+        return "redirect:/home";
+    }
+
+    @PostMapping ("/remove-record")
+    public String removeRecord(@RequestParam("title") String title) {
+        recordService.removeRecord(title);
+        return "redirect:/home";
+    }
 }

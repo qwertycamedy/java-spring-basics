@@ -24,4 +24,17 @@ public class RecordDao {
     public void saveRecord(Record record) {
         records.add(record);
     }
+
+    public void updateRecordStatus(String title, ERecordStatus newStatus) {
+        for (Record record : records) {
+            if (record.getTitle().equals(title)) {
+                record.setStatus(newStatus);
+                break;
+            }
+        }
+    }
+
+    public void removeRecord(String title) {
+        records.removeIf(record -> record.getTitle().equals(title));
+    }
 }
