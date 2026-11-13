@@ -48,14 +48,14 @@ public class CommonController {
     }
 
     @PostMapping("/make-record-done")
-    public String makeRecordDone(@RequestParam("title") String title) {
-        recordService.updateRecordStatus(title, ERecordStatus.DONE);
+    public String makeRecordDone(@RequestParam("id") int id) {
+        recordService.updateRecordStatus(id, ERecordStatus.DONE);
         return "redirect:/home";
     }
 
     @PostMapping ("/remove-record")
-    public String removeRecord(@RequestParam("title") String title) {
-        recordService.removeRecord(title);
+    public String removeRecord(@RequestParam("id") int id) {
+        recordService.removeRecord(id);
         return "redirect:/home";
     }
 }

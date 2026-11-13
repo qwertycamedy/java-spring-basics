@@ -25,16 +25,16 @@ public class RecordDao {
         records.add(record);
     }
 
-    public void updateRecordStatus(String title, ERecordStatus newStatus) {
+    public void updateRecordStatus(int id, ERecordStatus newStatus) {
         for (Record record : records) {
-            if (record.getTitle().equals(title)) {
+            if (record.getId() == id) {
                 record.setStatus(newStatus);
                 break;
             }
         }
     }
 
-    public void removeRecord(String title) {
-        records.removeIf(record -> record.getTitle().equals(title));
+    public void removeRecord(int id) {
+        records.removeIf(record -> record.getId() == id);
     }
 }

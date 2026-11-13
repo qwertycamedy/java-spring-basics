@@ -28,11 +28,11 @@ public class RecordService {
         }
     }
 
-    public void updateRecordStatus(String title, ERecordStatus newStatus) {
-        recordDao.updateRecordStatus(title, newStatus);
+    public void updateRecordStatus(int id, ERecordStatus newStatus) {
+        recordDao.updateRecordStatus(id, newStatus);
     }
 
-    public void removeRecord(String title) {
-        recordDao.removeRecord(title);
+    public void removeRecord(int id) {
+        recordDao.removeRecord(id);
     }
 }
