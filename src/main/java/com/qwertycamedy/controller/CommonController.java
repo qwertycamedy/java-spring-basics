@@ -1,7 +1,5 @@
 package com.qwertycamedy.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.qwertycamedy.service.RecordService;
 import com.qwertycamedy.entity.ERecordStatus;
-import com.qwertycamedy.entity.Record;
+import com.qwertycamedy.entity.dto.RecordsContainerDto;
 
 @Controller
 public class CommonController {
     private final RecordService recordService;
 
-    @Autowired
+    @Autowired 
     public CommonController(RecordService recordService) {
         this.recordService = recordService;
     }
@@ -28,15 +26,12 @@ public class CommonController {
     }
 
     @GetMapping("/home")
-    public String getMainPage(Model model) {
-        List<Record> records = recordService.findAllRecords();
-        int numberOfDone = (int) records.stream().filter(record -> record.getStatus() == ERecordStatus.DONE).count();
-        int numberOfActive = (int) records.stream().filter(record -> record.getStatus() == ERecordStatus.ACTIVE)
-                .count();
+    public String getMainPage(Model model, @RequestParam(name = "filter", required = false) String filterMode) {
+        RecordsContainerDto container = recordService.findAllRecords(filterMode);
 
-        model.addAttribute("records", records);
-        model.addAttribute("numberOfDoneRecords", numberOfDone);
-        model.addAttribute("numberOfActiveRecords", numberOfActive);
+        model.addAttribute("records", container.getRecords());
+        model.addAttribute("numberOfDoneRecords", container.getNumberOfDone());
+        model.addAttribute("numberOfActiveRecords", container.getNumberOfActive());
 
         return "main-page";
     }
@@ -53,7 +48,7 @@ public class CommonController {
         return "redirect:/home";
     }
 
-    @PostMapping ("/remove-record")
+    @PostMapping("/remove-record")
     public String removeRecord(@RequestParam("id") int id) {
         recordService.removeRecord(id);
         return "redirect:/home";

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
   <head>
@@ -18,17 +19,17 @@
                 </div>
             </div>
             <div class="filter-container">
-                <form class="filter-form">
+                <form action="${pageContext.request.contextPath}/home" method="get" class="filter-form">
                     <div class="filter-form__input">
-                        <input type="radio" id="filter-form__status_all" name="filter" value="all" checked>
+                        <input type="radio" id="filter-form__status_all" name="filter" value="all" ${empty param.filter or (fn:toLowerCase(param.filter) != 'active' and fn:toLowerCase(param.filter) != 'done')  ? 'checked' : ''}>
                         <label for="filter-form__status_all">All</label>
                     </div>
                     <div class="filter-form__input">
-                        <input type="radio" id="filter-form__status_active" name="filter" value="active">
+                        <input type="radio" id="filter-form__status_active" name="filter" value="active" ${fn:toLowerCase(param.filter) == 'active' ? 'checked' : ''}>
                         <label for="filter-form__status_active">Active</label>
                     </div>
                     <div class="filter-form__input">
-                        <input type="radio" id="filter-form__status_done" name="filter" value="done">
+                        <input type="radio" id="filter-form__status_done" name="filter" value="done" ${fn:toLowerCase(param.filter) == 'done' ? 'checked' : ''}>
                         <label for="filter-form__status_done">Done</label>
                     </div>
                     <button type="submit">Apply</button>
