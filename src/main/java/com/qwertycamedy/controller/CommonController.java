@@ -15,7 +15,7 @@ import com.qwertycamedy.entity.dto.RecordsContainerDto;
 public class CommonController {
     private final RecordService recordService;
 
-    @Autowired 
+    @Autowired
     public CommonController(RecordService recordService) {
         this.recordService = recordService;
     }
@@ -43,14 +43,21 @@ public class CommonController {
     }
 
     @PostMapping("/make-record-done")
-    public String makeRecordDone(@RequestParam("id") int id) {
+    public String makeRecordDone(
+            @RequestParam("id") int id,
+            @RequestParam(name = "filter", required = false) String filterMode) {
         recordService.updateRecordStatus(id, ERecordStatus.DONE);
-        return "redirect:/home";
+
+        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode
+                : "");
     }
 
     @PostMapping("/remove-record")
-    public String removeRecord(@RequestParam("id") int id) {
+    public String removeRecord(
+            @RequestParam("id") int id,
+            @RequestParam(name = "filter", required = false) String filterMode) {
         recordService.removeRecord(id);
-        return "redirect:/home";
+        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode
+                : "");
     }
 }
