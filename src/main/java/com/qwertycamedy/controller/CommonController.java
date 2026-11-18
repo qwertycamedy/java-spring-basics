@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.qwertycamedy.service.RecordService;
 import com.qwertycamedy.entity.ERecordStatus;
+import com.qwertycamedy.entity.dto.QueryParametersDto;
 import com.qwertycamedy.entity.dto.RecordsContainerDto;
 
 @Controller
@@ -44,20 +45,23 @@ public class CommonController {
 
     @PostMapping("/make-record-done")
     public String makeRecordDone(
-            @RequestParam("id") int id,
-            @RequestParam(name = "filter", required = false) String filterMode) {
+            QueryParametersDto queryParameters) {
+        int id = queryParameters.getId();
+        String filter = queryParameters.getFilter();
+
         recordService.updateRecordStatus(id, ERecordStatus.DONE);
 
-        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode
-                : "");
+        return queryParameters.homeRequestString(filter);
     }
 
     @PostMapping("/remove-record")
     public String removeRecord(
-            @RequestParam("id") int id,
-            @RequestParam(name = "filter", required = false) String filterMode) {
+            QueryParametersDto queryParameters) {
+        int id = queryParameters.getId();
+        String filter = queryParameters.getFilter();
+
         recordService.removeRecord(id);
-        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode
-                : "");
+
+        return queryParameters.homeRequestString(filter);
     }
 }
